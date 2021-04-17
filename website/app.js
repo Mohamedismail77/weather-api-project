@@ -8,6 +8,7 @@ const output = document.querySelector('#entryHolder');
 let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
+
 const getWeatherData = async (url = '',zipCode,apiKey)=>{
 
     const response = await fetch(`${url}?zip=${zipCode}&appid=${apiKey}`, {
@@ -61,6 +62,17 @@ generateButton.addEventListener('click',()=>{
 });
 
 
-const updateUi = (data)=>{
-    output.innerText = `Temperature:${data.temperature}\nDate:${data.date}\nUser Feeling:${data.user_response}`;
+const updateUi = async ()=>{
+       const request =  await fetch('/projectData');
+        try{
+            const allData = await request.json();
+            console.log(allData)
+            document.getElementById('date').innerHTML = `Date:${allData.date}`;
+            document.getElementById('temp').innerHTML = `Temperature:${allData.temperature}`;
+            document.getElementById('content').innerHTML = `I feel:${allData.user_response}`;
+        }catch(err){
+            console.log('error',err);
+        }
 }
+
+updateUi();
