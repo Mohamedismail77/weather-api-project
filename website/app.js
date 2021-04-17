@@ -1,6 +1,7 @@
 /* Global Variables */
 const appId = "3e15e3ed3633b0ac40ef1c8d5945a468";
 const baseUrl = "https://api.openweathermap.org/data/2.5/weather";
+const uniteQuery = '&units=imperial';
 const generateButton = document.querySelector('#generate');
 const userReponseInput = document.querySelector('#feelings');
 const output = document.querySelector('#entryHolder');
@@ -11,7 +12,7 @@ let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
 const getWeatherData = async (url = '',zipCode,apiKey)=>{
 
-    const response = await fetch(`${url}?zip=${zipCode}&appid=${apiKey}`, {
+    const response = await fetch(`${url}?zip=${zipCode}&${uniteQuery}&appid=${apiKey}`, {
         method:'GET',
         credentials: 'same-origin',
     });
